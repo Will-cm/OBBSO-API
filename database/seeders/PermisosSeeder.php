@@ -17,7 +17,7 @@ class PermisosSeeder extends Seeder
         DB::table('permisos')->truncate();  //elimina los datos previos
 
         $rol = DB::table('roles')->select('id')->first();
-        $modulo = DB::table('modulo')->select('id')->first();
+        $modulo = DB::table('modulos')->select('id')->first();
         //dd($persona); ///mostrar en consola
 
         DB::table('permisos')->insert([

@@ -39,6 +39,8 @@ Route::group([
       Route::resource('role', 'RoleController');
       Route::resource('persona', 'PersonaController');
   }
+
+  /////nuevo
 );
 
 

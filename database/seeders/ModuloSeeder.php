@@ -15,11 +15,11 @@ class ModuloSeeder extends Seeder
     public function run()
     {
         //DB::table('rol')->truncate();  //elimina los datos previos
-        DB::table('modulo')->insert([
+        DB::table('modulos')->insert([
           'titulo' => 'usuarios',
         ]);
 
-        DB::table('modulo')->insert([
+        DB::table('modulos')->insert([
           'titulo' => 'productos',
         ]);
     }
