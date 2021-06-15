@@ -17,21 +17,21 @@ class UserSeeder extends Seeder
     {
         //DB::table('users')->truncate();  //elimina los datos previos
 
-        $persona = DB::table('personas')->select('id')->first();
+        $persona = DB::table('personas')->select('id_persona')->first();
         //$rol = DB::table('roles')->select('id')->first();
         //dd($persona); ///mostrar en consola
 
         DB::table('users')->insert([          
           'username' => 'admin',
           'password' => Hash::make('123456'),
-          'persona_id' => $persona->id,
+          'id_persona' => $persona->id_persona,
           //'rol_id' => $rol->id,
         ]);
 
         DB::table('users')->insert([          
           'username' => 'user',
           'password' => Hash::make('123456'),
-          'persona_id' => 2,
+          'id_persona' => 2,
           //'rol_id' => 2,
         ]);
     }

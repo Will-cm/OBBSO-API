@@ -17,11 +17,11 @@ class Rol_userSeeder extends Seeder
         DB::table('rol_users')->truncate();  //elimina los datos previos
 
         $rol = DB::table('roles')->select('id')->first();
-        $user = DB::table('users')->select('id')->first();        
+        $user = DB::table('users')->select('id_usuario')->first();        
 
         DB::table('rol_users')->insert([          
           'rol_id' => $rol->id,
-          'user_id' => $user->id,
+          'user_id' => $user->id_usuario,
         ]);
 
         DB::table('rol_users')->insert([          
