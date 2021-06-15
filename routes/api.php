@@ -17,13 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });  */
-Route::post('login', [AuthController::class, 'login']);
+
 Route::group([
     //'middleware' => 'api',
     //'namespace' => 'App\Http\Controllers',
     'prefix' => 'auth'
 ], function () {
-    //Route::post('login', [AuthController::class, 'login']);
+    Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::get('profile', [AuthController::class, 'profile']);
@@ -37,7 +37,7 @@ Route::group([
     //'prefix' => 'auth'   
   ], function($router) {
       //Route::resource('role', 'RoleController');
-      Route::get('role', 'RoleController@index')->name('role.index');
+      //Route::get('role', 'RoleController@index')->name('role.index');
       Route::post('role', 'RoleController@store')->name('role.store');
       //Route::get('role/{role}', 'RoleController@show')->name('role.show');
       Route::put('role/{role}', 'RoleController@update')->name('role.update');
@@ -61,5 +61,7 @@ Route::group([
 
   /////nuevo
 );
+
+Route::get('role', 'App\Http\Controllers\RoleController@index')->name('role.index');
 
 
