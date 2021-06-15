@@ -27,12 +27,5 @@ class UserSeeder extends Seeder
           'persona_id' => $persona->id,
           //'rol_id' => $rol->id,
         ]);
-
-        DB::table('users')->insert([          
-          'username' => 'user',
-          'password' => Hash::make('123456'),
-          'persona_id' => 2,
-          //'rol_id' => 2,
-        ]);
     }
 }

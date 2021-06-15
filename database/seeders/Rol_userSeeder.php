@@ -23,10 +23,5 @@ class Rol_userSeeder extends Seeder
           'rol_id' => $rol->id,
           'user_id' => $user->id,
         ]);
-
-        DB::table('rol_users')->insert([          
-          'rol_id' => 2,
-          'user_id' => 2,
-        ]);
     }
 }
