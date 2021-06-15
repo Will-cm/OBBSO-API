@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permiso;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class PermisoController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +14,11 @@ class PermisoController extends Controller
      */
     public function index()
     {
-        $permiso = Permiso::all();   
-        return response()->json($permiso->toArray());
+        $user = User::all();    
+        return response()->json($user);
     }
 
-    ////////////////////////create
+    ///////////////create
 
     /**
      * Store a newly created resource in storage.
@@ -28,9 +28,11 @@ class PermisoController extends Controller
      */
     public function store(Request $request)
     {
-        $permiso = new Permiso($request->all());
-        $permiso->save();
-        return response()->json(['message' => 'User created successfully', 'rol' => $permiso]);
+        $user = new User(request()->all());
+        $user->password = bcrypt($user->password);
+        $user->save();
+
+        return response()->json(['message' => 'User created successfully', 'user' => $user]);
     }
 
     /**
@@ -41,11 +43,11 @@ class PermisoController extends Controller
      */
     public function show($id)
     {
-        $permiso = Permiso::find($id);
-        return response()->json($permiso);
+        $user = User::find($id);    
+        return response()->json($user);
     }
 
-    ////////////////////////////edit
+    //////////////edit
 
     /**
      * Update the specified resource in storage.
@@ -56,10 +58,12 @@ class PermisoController extends Controller
      */
     public function update(Request $request, $id)
     {
+      /*
         $input = $request->all();
-        $permiso = Permiso::find($id);
-        $permiso->update($input);
-        return response()->json(['ok'=>true, 'mensaje'=> 'Se modifico con exito']);
+        $user = User::find($id);
+        $user->password = bcrypt($input->password);
+        $user->update($input);
+        return response()->json(['ok'=>true, 'mensaje'=> 'Se modifico con exito']);  */
     }
 
     /**
@@ -70,8 +74,8 @@ class PermisoController extends Controller
      */
     public function destroy($id)
     {
-        $permiso =Permiso::where('id',$id);
-        $permiso->delete();
+        $user =User::where('id',$id);
+        $user->delete();
         return response()->json(['ok'=>true, 'mensaje'=> 'Se elimino con exito']);
     }
 }

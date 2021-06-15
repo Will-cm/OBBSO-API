@@ -28,7 +28,9 @@ class ModuloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $modulo = new Modulo($request->all());
+        $modulo->save();
+        return response()->json(['message' => 'User created successfully', 'rol' => $modulo]);
     }
 
     /**
@@ -39,7 +41,8 @@ class ModuloController extends Controller
      */
     public function show($id)
     {
-        //
+        $modulo = Modulo::find($id);
+        return response()->json($modulo);
     }
 
     ////////////////////////////edit
@@ -53,7 +56,10 @@ class ModuloController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $modulo = Modulo::find($id);
+        $modulo->update($input);
+        return response()->json(['ok'=>true, 'mensaje'=> 'Se modifico con exito']);
     }
 
     /**
@@ -64,6 +70,8 @@ class ModuloController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $modulo =Modulo::where('id',$id);
+        $modulo->delete();
+        return response()->json(['ok'=>true, 'mensaje'=> 'Se elimino con exito']);
     }
 }
