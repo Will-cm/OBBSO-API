@@ -25,5 +25,54 @@ class PermisosSeeder extends Seeder
           'modulo_id' => $modulo->id,
           'estado' => 1,
         ]);
+
+        DB::table('permisos')->insert([
+          'rol_id' => 1,
+          'modulo_id' => 2,
+          'estado' => 1,
+        ]);
+
+        DB::table('permisos')->insert([
+          'rol_id' => 1,
+          'modulo_id' => 3,
+          'estado' => 1,
+        ]);
+
+        DB::table('permisos')->insert([
+          'rol_id' => 1,
+          'modulo_id' => 4,
+          'estado' => 1,
+        ]);
+
+        DB::table('permisos')->insert([
+          'rol_id' => 1,
+          'modulo_id' => 5,
+          'estado' => 1,
+        ]);
+
+        DB::table('permisos')->insert([
+          'rol_id' => 1,
+          'modulo_id' => 6,
+          'estado' => 1,
+        ]);
+
+        /////user
+        DB::table('permisos')->insert([
+          'rol_id' => 2,
+          'modulo_id' => 4,
+          'estado' => 1,
+        ]);
+
+        DB::table('permisos')->insert([
+          'rol_id' => 2,
+          'modulo_id' => 5,
+          'estado' => 1,
+        ]);
+
+        DB::table('permisos')->insert([
+          'rol_id' => 2,
+          'modulo_id' => 6,
+          'estado' => 0,
+        ]);
     }
 }

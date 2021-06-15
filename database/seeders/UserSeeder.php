@@ -15,17 +15,24 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->truncate();  //elimina los datos previos
+        //DB::table('users')->truncate();  //elimina los datos previos
 
         $persona = DB::table('personas')->select('id')->first();
-        $rol = DB::table('roles')->select('id')->first();
+        //$rol = DB::table('roles')->select('id')->first();
         //dd($persona); ///mostrar en consola
 
         DB::table('users')->insert([          
-          'email' => 'admin@admin.com',
+          'username' => 'admin',
           'password' => Hash::make('123456'),
           'persona_id' => $persona->id,
-          'rol_id' => $rol->id,
+          //'rol_id' => $rol->id,
+        ]);
+
+        DB::table('users')->insert([          
+          'username' => 'user',
+          'password' => Hash::make('123456'),
+          'persona_id' => 2,
+          //'rol_id' => 2,
         ]);
     }
 }
