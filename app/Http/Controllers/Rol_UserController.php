@@ -14,7 +14,7 @@ class Rol_UserController extends Controller
      */
     public function index()
     {
-        $todos = Rol_user::all();   
+        $todos = Rol_user::all(); 
         return response()->json($todos->toArray());
     }
 

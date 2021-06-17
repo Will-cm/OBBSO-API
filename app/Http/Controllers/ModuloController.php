@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Modulo;
+use App\Models\Role;    ///
+use Illuminate\Support\Facades\DB; ///
 use Illuminate\Http\Request;
 
 class ModuloController extends Controller
@@ -14,8 +16,18 @@ class ModuloController extends Controller
      */
     public function index()
     {
-        $modulo = Modulo::all();   
-        return response()->json($modulo->toArray());
+        /*
+        $modulo = Modulo::all();
+        return response()->json($modulo->toArray()); */
+        
+        $role = Role::join("rol_users","rol_users.rol_id","=","roles.id")
+            ->where('rol_users.user_id','=',auth()->user()->id)  //1 // auth()->user()
+            ->get();  // para obtener en forma de cadena  ->toSql();
+           
+        $modulo = Modulo::whereIn('id', [1,2,3])
+            ->get();
+        return response()->json($modulo); 
+
     }
 
     ////////////////////////create
