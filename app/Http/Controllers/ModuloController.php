@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Modulo;
 use App\Models\Role;    ///
+use App\Models\Permiso;    ///
+use App\Models\Rol_user;    ///
 use Illuminate\Support\Facades\DB; ///
 use Illuminate\Http\Request;
 
@@ -16,17 +18,30 @@ class ModuloController extends Controller
      */
     public function index()
     {
-        /*
-        $modulo = Modulo::all();
-        return response()->json($modulo->toArray()); */
         
+        $modulo = Modulo::all();
+        return response()->json($modulo->toArray()); 
+        /*
         $role = Role::join("rol_users","rol_users.rol_id","=","roles.id")
             ->where('rol_users.user_id','=',auth()->user()->id)  //1 // auth()->user()
             ->get();  // para obtener en forma de cadena  ->toSql();
            
         $modulo = Modulo::whereIn('id', [1,2,3])
             ->get();
-        return response()->json($modulo); 
+        return response()->json($modulo); */
+        /*
+        $modulo = Role::join("permisos","permisos.rol_id","=","roles.id")
+            ->join("modulos","modulos.id","=","permisos.modulo_id")
+            ->select("modulos.id","modulos.titulo")
+            ->addSelect(['id_ru' => Rol_user::select('rol_users.rol_id')
+                  //->whereColumn('rol_users.rol_id', 'roles.id')
+                  ->where('rol_users.user_id','=',3)])
+            //->whereIn('roles.id','=',1)  //1 // auth()->user()
+            //->whereRaw('roles.id in (select rol_users.rol_id from rol_users where rol_users.rol_id=1)')
+            
+            ->get();  // para obtener en forma de cadena  ->toSql();
+
+        return response()->json($modulo->toArray());  */
 
     }
 
