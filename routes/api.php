@@ -55,10 +55,10 @@ Route::group([
       Route::put('user/{user}', 'UserController@update')->name('user.update');  //
       Route::delete('user/{user}', 'UserController@destroy')->name('user.destroy');
 
-      Route::get('rol_user', 'Rol_userController@index')->name('rol_user.index');
-      Route::post('rol_user', 'Rol_userController@store')->name('rol_user.store');      
-      Route::put('rol_user/{rol_user}', 'Rol_userController@update')->name('rol_user.update');
-      Route::delete('rol_user/{rol_user}', 'Rol_userController@destroy')->name('rol_user.destroy');
+      Route::get('rol_user', 'Rol_UserController@index')->name('rol_user.index');
+      Route::post('rol_user', 'Rol_UserController@store')->name('rol_user.store');      
+      Route::put('rol_user/{rol_user}', 'Rol_UserController@update')->name('rol_user.update');
+      Route::delete('rol_user/{rol_user}', 'Rol_UserController@destroy')->name('rol_user.destroy');
 
       Route::get('modulo', 'ModuloController@index')->name('modulo.index');
       Route::post('modulo', 'ModuloController@store')->name('modulo.store');
