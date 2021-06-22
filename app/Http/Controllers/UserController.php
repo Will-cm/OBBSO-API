@@ -57,13 +57,21 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-      /*
-        $input = $request->all();
+    {   /*
+        //MODIFICAR MI PERFIL
+        $user = Auth()->user();
+        $password = bcrypt($request->password);
+        $user->username = ($request->username);
+        $user->password = $password;
+        $user->save();
+        return response()->json(['ok'=>true, 'mensaje'=> 'Se modifico con exito']); 
+        */ 
+        //MODIFICAR CUALQUIER USUARIO POR SU ID
         $user = User::find($id);
-        $user->password = bcrypt($input->password);
-        $user->update($input);
-        return response()->json(['ok'=>true, 'mensaje'=> 'Se modifico con exito']);  */
+        $user->username = ($request->username);
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return response()->json(['ok'=>true, 'mensaje'=> 'Se modifico con exito']);
     }
 
     /**

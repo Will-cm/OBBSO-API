@@ -52,7 +52,7 @@ Route::group([
       Route::get('user', 'UserController@index')->name('user.index');
       Route::post('user', 'UserController@store')->name('user.store');
       Route::get('user/{user}', 'UserController@show')->name('user.show');      
-      //Route::put('user/{user}', 'UserController@update')->name('user.update');
+      Route::put('user/{user}', 'UserController@update')->name('user.update');  //
       Route::delete('user/{user}', 'UserController@destroy')->name('user.destroy');
 
       Route::get('rol_user', 'Rol_userController@index')->name('rol_user.index');
