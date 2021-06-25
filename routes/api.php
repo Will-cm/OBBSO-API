@@ -69,11 +69,11 @@ Route::group([
 
     ///permiso = modulo
     //Route::get('modulo', 'ModuloController@index')->name('modulo.index');
-      Route::get('permiso', 'ModuloController@index')->name('permiso.index');
-      Route::get('permiso/{permiso}', 'ModuloController@lista')->name('permiso.lista');
+      Route::get('permisos', 'ModuloController@index')->name('permisos.index');
+      Route::get('permisos/{permisos}', 'ModuloController@lista')->name('permisos.lista');
       //Route::post('permiso', 'ModuloController@store')->name('permiso.store');
       //Route::get('permiso/{permiso}', 'ModuloController@show')->name('permiso.show');
-      Route::put('permiso/{permiso}', 'ModuloController@update')->name('permiso.update');
+      Route::put('permisos/{permisos}', 'ModuloController@update')->name('permisos.update');
       //Route::delete('permiso/{permiso}', 'ModuloController@destroy')->name('permiso.destroy');
 /*
       //TABLA INTERMEDIA PERMISOS = CAPACIDAD
