@@ -17,7 +17,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);   //
+        $this->middleware('auth:api', ['except' => ['login']]);   //, 'register'
     }
 
      /**
@@ -51,13 +51,14 @@ class AuthController extends Controller
     }
 
     /////////////////
+    /*
     public function register(){
       $user = new User(request()->all());
       $user->password = bcrypt($user->password);
       $user->save();
 
       return response()->json(['message' => 'User created successfully', 'user' => $user]);
-    }
+    }    */
 
     /**
      * Log the user out (Invalidate the token).

@@ -10,7 +10,7 @@ class Permiso extends Model
     use HasFactory;
     /////////////////////
     protected $table ='permisos';   
-    protected $primaryKey = "id";
-    protected $fillable = ['rol_id', 'modulo_id', 'estado'];  
+    protected $primaryKey = "id_permiso";
+    protected $fillable = ['id_user', 'id_modulo', 'estado']; 
     public $timestamps = false;
 }

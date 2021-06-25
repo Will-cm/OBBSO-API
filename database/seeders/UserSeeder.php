@@ -24,14 +24,14 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([          
           'username' => 'admin',
           'password' => Hash::make('123456'),
-          'id_persona' => $persona->id_persona,
+          //'id_persona' => 1,
           //'rol_id' => $rol->id,
         ]);
 
         DB::table('users')->insert([          
           'username' => 'user',
           'password' => Hash::make('123456'),
-          'id_persona' => 2,
+          'id_persona' => $persona->id_persona,
           //'rol_id' => 2,
         ]);
     }

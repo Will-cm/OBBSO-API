@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Modulo;
-use App\Models\Role;    ///
+//use App\Models\Role;    ///
 use App\Models\Permiso;    ///
-use App\Models\Rol_user;    ///
+//use App\Models\Rol_user;    ///
 use Illuminate\Support\Facades\DB; ///
 use Illuminate\Http\Request;
 
@@ -18,9 +18,9 @@ class ModuloController extends Controller
      */
     public function index()
     {
-        /*
+        
         $modulo = Modulo::all();
-        return response()->json($modulo->toArray()); */
+        return response()->json($modulo->toArray());
         /*
         $role = Role::join("rol_users","rol_users.rol_id","=","roles.id")
             ->where('rol_users.user_id','=',auth()->user()->id)  //1 // auth()->user()
@@ -41,6 +41,7 @@ class ModuloController extends Controller
             
             ->get();  // para obtener en forma de cadena  ->toSql();  */
     //LISTAR MODULOS SEGUN ROL Y PERMISOS
+    /*
           $modulo = Role::join("permisos","permisos.rol_id","=","roles.id")
           ->join("modulos","modulos.id","=","permisos.modulo_id")
           ->select("modulos.id","modulos.titulo")
@@ -52,7 +53,17 @@ class ModuloController extends Controller
           })            
           ->get();  // para obtener en forma de cadena  ->toSql();
         return response()->json($modulo->toArray());
+      */
 
+    }
+    //nuevo
+    public function lista($id){
+      $modulo = Modulo::join("permisos","permisos.id_modulo","=","modulos.id_modulo")
+                ->where('permisos.id_user','=',$id)  //1 // auth()->user()
+                ->where('permisos.estado','=',1)
+                ->select("modulos.id_modulo","modulos.modulo")
+                ->get();
+      return response()->json($modulo->toArray());
     }
 
     ////////////////////////create
@@ -93,10 +104,19 @@ class ModuloController extends Controller
      */
     public function update(Request $request, $id)
     {
+      /*
         $input = $request->all();
         $modulo = Modulo::find($id);
         $modulo->update($input);
-        return response()->json(['ok'=>true, 'mensaje'=> 'Se modifico con exito']);
+        return response()->json(['ok'=>true, 'mensaje'=> 'Se modifico con exito']);  */
+
+        $permiso = Permiso::where('id_user','=',$id)
+                    ->where('id_modulo','=',$request->id_modulo)
+                    ->first();  //get()  //para mostrar con corchetes
+        $permiso->estado = $request->estado;
+        $permiso->save();        
+        return response()->json($permiso);
+
     }
 
     /**

@@ -16,63 +16,93 @@ class PermisosSeeder extends Seeder
     {
         DB::table('permisos')->truncate();  //elimina los datos previos
 
-        $rol = DB::table('roles')->select('id')->first();
-        $modulo = DB::table('modulos')->select('id')->first();
+        $user = DB::table('users')->select('id_user')->first();
+        $modulo = DB::table('modulos')->select('id_modulo')->first();
         //dd($persona); ///mostrar en consola
 
         DB::table('permisos')->insert([
-          'rol_id' => $rol->id,
-          'modulo_id' => $modulo->id,
+          'id_user' => $user->id_user,
+          'id_modulo' => $modulo->id_modulo,
           'estado' => 1,
         ]);
 
         DB::table('permisos')->insert([
-          'rol_id' => 1,
-          'modulo_id' => 2,
+          'id_user' => 1,
+          'id_modulo' => 2,
           'estado' => 1,
         ]);
 
         DB::table('permisos')->insert([
-          'rol_id' => 1,
-          'modulo_id' => 3,
+          'id_user' => 1,
+          'id_modulo' => 3,
           'estado' => 1,
         ]);
 
         DB::table('permisos')->insert([
-          'rol_id' => 1,
-          'modulo_id' => 4,
+          'id_user' => 1,
+          'id_modulo' => 4,
           'estado' => 1,
         ]);
 
         DB::table('permisos')->insert([
-          'rol_id' => 1,
-          'modulo_id' => 5,
+          'id_user' => 1,
+          'id_modulo' => 5,
           'estado' => 1,
         ]);
 
         DB::table('permisos')->insert([
-          'rol_id' => 1,
-          'modulo_id' => 6,
-          'estado' => 1,
-        ]);
-
-        /////user
-        DB::table('permisos')->insert([
-          'rol_id' => 2,
-          'modulo_id' => 4,
+          'id_user' => 1,
+          'id_modulo' => 6,
           'estado' => 1,
         ]);
 
         DB::table('permisos')->insert([
-          'rol_id' => 2,
-          'modulo_id' => 5,
+          'id_user' => 1,
+          'id_modulo' => 7,
           'estado' => 1,
         ]);
 
         DB::table('permisos')->insert([
-          'rol_id' => 2,
-          'modulo_id' => 6,
-          'estado' => 0,
+          'id_user' => 1,
+          'id_modulo' => 8,
+          'estado' => 1,
+        ]);
+
+        /////user////////////////////////////
+        DB::table('permisos')->insert([
+          'id_user' => 2,
+          'id_modulo' => 1,
+        ]);
+
+        DB::table('permisos')->insert([
+          'id_user' => 2,
+          'id_modulo' => 2,
+        ]);
+        DB::table('permisos')->insert([
+          'id_user' => 2,
+          'id_modulo' => 3,
+        ]);
+        DB::table('permisos')->insert([
+          'id_user' => 2,
+          'id_modulo' => 4,
+        ]);
+        DB::table('permisos')->insert([
+          'id_user' => 2,
+          'id_modulo' => 5,
+        ]);
+        DB::table('permisos')->insert([
+          'id_user' => 2,
+          'id_modulo' => 6,
+          'estado' => 1
+        ]);
+        DB::table('permisos')->insert([
+          'id_user' => 2,
+          'id_modulo' => 7,
+          'estado' => 1
+        ]);
+        DB::table('permisos')->insert([
+          'id_user' => 2,
+          'id_modulo' => 8,
         ]);
     }
 }

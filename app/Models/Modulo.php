@@ -10,7 +10,7 @@ class Modulo extends Model
     use HasFactory;
     /////////////////////
     protected $table ='modulos';   
-    protected $primaryKey = "id";
-    protected $fillable = ['titulo'];  
+    protected $primaryKey = "id_modulo";
+    protected $fillable = ['modulo'];  
     public $timestamps = false;
 }

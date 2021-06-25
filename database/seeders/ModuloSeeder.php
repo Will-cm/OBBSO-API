@@ -16,36 +16,36 @@ class ModuloSeeder extends Seeder
     {
         //DB::table('rol')->truncate();  //elimina los datos previos
         DB::table('modulos')->insert([
-          'titulo' => 'personas',
+          'modulo' => 'personas',
         ]);
 
         DB::table('modulos')->insert([
-          'titulo' => 'usuarios',
+          'modulo' => 'usuarios',
         ]);
 
         DB::table('modulos')->insert([
-          'titulo' => 'roles',
+          'modulo' => 'roles',
         ]);
 
         DB::table('modulos')->insert([
-          'titulo' => 'modulos',
+          'modulo' => 'modulos',
         ]);
 
         DB::table('modulos')->insert([
-          'titulo' => 'permisos',
+          'modulo' => 'permisos',
         ]);
 
         DB::table('modulos')->insert([
-          'titulo' => 'productos',
+          'modulo' => 'productos',
         ]);
 
         ////////
         DB::table('modulos')->insert([
-          'titulo' => 'pedidos',
+          'modulo' => 'pedidos',
         ]);
 
         DB::table('modulos')->insert([
-          'titulo' => 'clientes',
+          'modulo' => 'empleados',
         ]);
     }
 }

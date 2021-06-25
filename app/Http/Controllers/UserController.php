@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Modulo;
+use Illuminate\Support\Facades\DB; ///
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -28,10 +30,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+      /*
         $user = new User(request()->all());
         $user->password = bcrypt($user->password);
         $user->save();
-
+        return response()->json(['message' => 'User created successfully', 'user' => $user]);  */
+        // LLENAR LA TABLA PERMISOS
+        $user = new User(request()->all());
+        $user->password = bcrypt($user->password);
+        $modulo = Modulo::get();
+        $cantidad = $modulo->count();
+        $num = 1;
+        if ($user->save()) {
+          while ($num<=$cantidad) {
+            DB::table('permisos')->insert([
+              'id_user' => $user->id_user,
+              'id_modulo' => $num,
+            ]);
+            $num = $num + 1;
+          }
+        }
         return response()->json(['message' => 'User created successfully', 'user' => $user]);
     }
 
