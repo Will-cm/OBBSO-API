@@ -47,14 +47,14 @@ Route::group([
     Route::delete('role/{role}', 'RoleController@destroy')->name('role.destroy');   */
 
     //Route::resource('persona', 'PersonaController');
-    Route::get('persona', 'PersonaController@index')->name('persona.index');
+//    Route::get('persona', 'PersonaController@index')->name('persona.index');
 //    Route::post('persona', 'PersonaController@store')->name('persona.store');
 //    Route::put('persona/{persona}', 'PersonaController@update')->name('persona.update');
 //    Route::delete('persona/{persona}', 'PersonaController@destroy')->name('persona.destroy');
 
-    Route::get('usuario', 'UserController@index')->name('usuario.index');
-    Route::post('usuario', 'UserController@store')->name('usuario.store');
-    //Route::get('user/{user}', 'UserController@show')->name('user.show');
+    Route::get('', 'UserController@index')->name('usuario.index');
+    Route::post('', 'UserController@store')->name('usuario.store');
+    Route::get('{user}', 'UserController@show')->name('user.show');
     //Route::put('user/{user}', 'UserController@update')->name('user.update');  //
     //Route::delete('user/{user}', 'UserController@destroy')->name('user.destroy');
 
@@ -69,13 +69,21 @@ Route::group([
           Route::put('rol_user/{rol_user}', 'Rol_UserController@update')->name('rol_user.update');
           Route::delete('rol_user/{rol_user}', 'Rol_UserController@destroy')->name('rol_user.destroy');  */
 
+
+});
+
+Route::group([
+    'middleware' => 'api',
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'permisos'
+], function ($router) {
     ///permiso = modulo
     //Route::get('modulo', 'ModuloController@index')->name('modulo.index');
-    Route::get('permisos', 'ModuloController@index')->name('permisos.index');
-    Route::get('permisos/{permisos}', 'ModuloController@lista')->name('permisos.lista');
+    Route::get('', 'ModuloController@index')->name('permisos.index');
+    Route::get('{permisos}', 'ModuloController@lista')->name('permisos.lista');
     //Route::post('permiso', 'ModuloController@store')->name('permiso.store');
     //Route::get('permiso/{permiso}', 'ModuloController@show')->name('permiso.show');
-    Route::put('permisos/{permisos}', 'ModuloController@update')->name('permisos.update');
+    Route::put('{permisos}', 'ModuloController@update')->name('permisos.update');
     //Route::delete('permiso/{permiso}', 'ModuloController@destroy')->name('permiso.destroy');
     /*
           //TABLA INTERMEDIA PERMISOS = CAPACIDAD
@@ -85,9 +93,6 @@ Route::group([
           Route::get('capacidad/{capacidad}', 'PermisoController@show')->name('capacidad.show');
           Route::put('capacidad/{capacidad}', 'PermisoController@update')->name('capacidad.update');
           Route::delete('capacidad/{capacidad}', 'PermisoController@destroy')->name('capacidad.destroy');  */
-}
-
-/////nuevo
-);
+});
 
 
