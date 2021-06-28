@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Modulo;
-use Illuminate\Support\Facades\DB; ///
+use Illuminate\Support\Facades\DB;
+
+///
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -16,7 +18,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();    
+//        $user = User::all();
+        $user = DB::table('users')
+            ->join('personas', 'personas.id_persona', '=', 'users.id_persona')
+//            ->select()
+            ->get();
         return response()->json($user);
     }
 
@@ -25,16 +31,16 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-      /*
-        $user = new User(request()->all());
-        $user->password = bcrypt($user->password);
-        $user->save();
-        return response()->json(['message' => 'User created successfully', 'user' => $user]);  */
+        /*
+          $user = new User(request()->all());
+          $user->password = bcrypt($user->password);
+          $user->save();
+          return response()->json(['message' => 'User created successfully', 'user' => $user]);  */
         // LLENAR LA TABLA PERMISOS
         $user = new User(request()->all());
         $user->password = bcrypt($user->password);
@@ -42,13 +48,13 @@ class UserController extends Controller
         $cantidad = $modulo->count();
         $num = 1;
         if ($user->save()) {
-          while ($num<=$cantidad) {
-            DB::table('permisos')->insert([
-              'id_user' => $user->id_user,
-              'id_modulo' => $num,
-            ]);
-            $num = $num + 1;
-          }
+            while ($num <= $cantidad) {
+                DB::table('permisos')->insert([
+                    'id_user' => $user->id_user,
+                    'id_modulo' => $num,
+                ]);
+                $num = $num + 1;
+            }
         }
         return response()->json(['message' => 'User created successfully', 'user' => $user]);
     }
@@ -56,12 +62,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $user = User::find($id);    
+        $user = User::find($id);
         return response()->json($user);
     }
 
@@ -70,8 +76,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -82,26 +88,26 @@ class UserController extends Controller
         $user->username = ($request->username);
         $user->password = $password;
         $user->save();
-        return response()->json(['ok'=>true, 'mensaje'=> 'Se modifico con exito']); 
-        */ 
+        return response()->json(['ok'=>true, 'mensaje'=> 'Se modifico con exito']);
+        */
         //MODIFICAR CUALQUIER USUARIO POR SU ID
         $user = User::find($id);
         $user->username = ($request->username);
         $user->password = bcrypt($request->password);
         $user->save();
-        return response()->json(['ok'=>true, 'mensaje'=> 'Se modifico con exito']);
+        return response()->json(['ok' => true, 'mensaje' => 'Se modifico con exito']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $user =User::where('id',$id);
+        $user = User::where('id', $id);
         $user->delete();
-        return response()->json(['ok'=>true, 'mensaje'=> 'Se elimino con exito']);
+        return response()->json(['ok' => true, 'mensaje' => 'Se elimino con exito']);
     }
 }
