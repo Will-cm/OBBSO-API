@@ -23,7 +23,7 @@ class UserController extends Controller
 //        $user = User::all();
         $user = DB::table('users')
             ->join('personas', 'personas.id_persona', '=', 'users.persona_id')
-            ->select('users.username', 'personas.nombres', 'personas.imagen')
+            ->select('users.id_user','users.username', 'personas.nombres', 'personas.imagen')
             ->get();
         return response()->json($user);
     }

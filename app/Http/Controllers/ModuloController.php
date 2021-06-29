@@ -60,8 +60,8 @@ class ModuloController extends Controller
     public function lista($id){
       $modulo = Modulo::join("permisos","permisos.id_modulo","=","modulos.id_modulo")
                 ->where('permisos.id_user','=',$id)  //1 // auth()->user()
-                ->where('permisos.estado','=',1)
-                ->select("modulos.id_modulo","modulos.modulo", "modulos.vicon", "modulos.ruta")
+//                ->where('permisos.estado','=',1)
+                ->select("modulos.id_modulo","modulos.modulo", "modulos.vicon", "modulos.ruta", "permisos.estado")
                 ->get();
       return response()->json($modulo->toArray());
     }
