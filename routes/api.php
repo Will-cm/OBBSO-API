@@ -58,7 +58,14 @@ Route::group([
     //Route::put('user/{user}', 'UserController@update')->name('user.update');  //
     //Route::delete('user/{user}', 'UserController@destroy')->name('user.destroy');
 
-    Route::get('empleado', 'EmpleadoController@index')->name('empleado.index');
+});
+
+Route::group([
+    'middleware' => 'api',
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'empleados'
+], function ($router) {
+    Route::get('', 'EmpleadoController@index')->name('empleado.index');
     Route::post('empleado', 'EmpleadoController@store')->name('empleado.store');
     //Route::get('empleado/{empleado}', 'EmpleadoController@show')->name('empleado.show');
     //Route::put('empleado/{empleado}', 'EmpleadoController@update')->name('empleado.update');  //
@@ -68,8 +75,6 @@ Route::group([
           Route::post('rol_user', 'Rol_UserController@store')->name('rol_user.store');
           Route::put('rol_user/{rol_user}', 'Rol_UserController@update')->name('rol_user.update');
           Route::delete('rol_user/{rol_user}', 'Rol_UserController@destroy')->name('rol_user.destroy');  */
-
-
 });
 
 Route::group([
