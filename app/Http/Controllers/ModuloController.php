@@ -109,13 +109,24 @@ class ModuloController extends Controller
         $modulo = Modulo::find($id);
         $modulo->update($input);
         return response()->json(['ok'=>true, 'mensaje'=> 'Se modifico con exito']);  */
-
+      /*
         $permiso = Permiso::where('id_user','=',$id)
                     ->where('id_modulo','=',$request->id_modulo)
                     ->first();  //get()  //para mostrar con corchetes
         $permiso->estado = $request->estado;
         $permiso->save();
-        return response()->json($permiso);
+        return response()->json($permiso);   */
+        $res = 'aa';
+        $array = $request->all();
+        foreach ($array as $key => $item) {
+            //$res = $item['id_modulo'];
+            $permiso = Permiso::where('id_user','=',$id)
+                        ->where('id_modulo','=',$item['id_modulo'])
+                        ->first();  //get()  //para mostrar con corchetes
+            $permiso->estado = $item['estado'];
+            $permiso->save();
+        }
+        return response()->json(['message' => 'Permisos updated successfully']);
 
     }
 
