@@ -18,18 +18,18 @@ class ModuloController extends Controller
      */
     public function index()
     {
-        
+
         $modulo = Modulo::all();
         return response()->json($modulo->toArray());
         /*
         $role = Role::join("rol_users","rol_users.rol_id","=","roles.id")
             ->where('rol_users.user_id','=',auth()->user()->id)  //1 // auth()->user()
             ->get();  // para obtener en forma de cadena  ->toSql();
-           
+
         $modulo = Modulo::whereIn('id', [1,2,3])
             ->get();
-        return response()->json($modulo); */   
-        /* 
+        return response()->json($modulo); */
+        /*
         $modulo = Role::join("permisos","permisos.rol_id","=","roles.id")
             ->join("modulos","modulos.id","=","permisos.modulo_id")
             ->select("modulos.id","modulos.titulo")
@@ -38,7 +38,7 @@ class ModuloController extends Controller
                   //->where('rol_users.user_id','=',2)])
             //->whereIn('roles.id','=',1)  //1 // auth()->user()
             ->whereRaw('roles.id in (select rol_users.rol_id from rol_users where rol_users.rol_id=2)')
-            
+
             ->get();  // para obtener en forma de cadena  ->toSql();  */
     //LISTAR MODULOS SEGUN ROL Y PERMISOS
     /*
@@ -50,7 +50,7 @@ class ModuloController extends Controller
             $query->select(DB::raw('rol_users.rol_id'))
                   ->from('rol_users')
                   ->where('rol_users.rol_id','=',auth()->user()->id);  //1 or 2
-          })            
+          })
           ->get();  // para obtener en forma de cadena  ->toSql();
         return response()->json($modulo->toArray());
       */
@@ -61,7 +61,7 @@ class ModuloController extends Controller
       $modulo = Modulo::join("permisos","permisos.id_modulo","=","modulos.id_modulo")
                 ->where('permisos.id_user','=',$id)  //1 // auth()->user()
                 ->where('permisos.estado','=',1)
-                ->select("modulos.id_modulo","modulos.modulo")
+                ->select("modulos.id_modulo","modulos.modulo", "modulos.vicon")
                 ->get();
       return response()->json($modulo->toArray());
     }
@@ -114,7 +114,7 @@ class ModuloController extends Controller
                     ->where('id_modulo','=',$request->id_modulo)
                     ->first();  //get()  //para mostrar con corchetes
         $permiso->estado = $request->estado;
-        $permiso->save();        
+        $permiso->save();
         return response()->json($permiso);
 
     }
