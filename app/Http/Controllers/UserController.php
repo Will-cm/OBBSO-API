@@ -71,6 +71,7 @@ class UserController extends Controller
     {
 //        $user = User::find($id);
         $user = DB::table('users')
+            ->join('personas', 'personas.id_persona', '=', 'users.persona_id')
             ->select('personas.nombres', 'personas.imagen')
             ->where('users.id_user', '=', $id)
             ->get();
