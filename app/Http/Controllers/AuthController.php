@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;  //////
+use App\Models\User;
+
+//////
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 //use Illuminate\Support\Facades\Auth;  //
 //use App\Http\Controllers\Controller;  //
 //use Symfony\Component\HttpFoundation\Response;  //
@@ -20,27 +24,29 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login']]);   //, 'register'
     }
 
-     /**
+    /**
      * Get a JWT via given credentials.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function login()
     {
-      
         $credentials = request(['username', 'password']);
-
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 404);  //401
+        $user = DB::table('users')
+            ->select('users.id_user')
+            ->where('users.username', '=', $credentials['username'])
+            ->get();
+        if (!$token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Input incorrect'], 404);  //401
         }
 
-        return $this->respondWithToken($token);
+        return $this->respondWithToken($token, $user);
         /*
-        $clientes = User::all();    
+        $clientes = User::all();
       return response()->json($clientes);  */
     }
 
-     /**
+    /**
      * Get the authenticated User.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -86,13 +92,14 @@ class AuthController extends Controller
     /**  /////////////////////////////////////
      * Get the token array structure.
      *
-     * @param  string $token
+     * @param string $token
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken($token, $user)
     {
         return response()->json([
+            'user' => $user,
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
